@@ -1,9 +1,25 @@
-import React from 'react';
+import React from 'react'
+import { connect } from 'react-redux'
+import { hideBurger, showBurger } from './actions'
 
-const App: React.FC = () => {
+const App: React.FC = (props: any) => {
+  const { burger, showBurger, hideBurger } = props
+  const { visible } = burger
+
   return (
-    <h1>Hello Burger</h1>
-  );
+    <div>
+      <h1>{visible ? '🍔 Delicious!!!' : '🍽 No burger found'}</h1>
+      <button onClick={showBurger}>Show Burger</button>
+      <button onClick={hideBurger}>Hide Burger</button>
+    </div>
+  )
 }
 
-export default App;
+const mapDispatchToProps = { showBurger, hideBurger }
+
+const mapStateToProps = (state: any) => ({ burger: state.burger })
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App)

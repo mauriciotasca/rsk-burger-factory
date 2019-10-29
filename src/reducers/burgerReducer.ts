@@ -1,15 +1,17 @@
-import { Action } from 'redux'
+import { createReducer } from 'redux-starter-kit'
+import { hideBurger, showBurger } from '../actions'
 
 const initialState = {
+  visible: false,
   layers: {}
 }
 
-export function burger(state = initialState, action: Action) {
-  switch (action.type) {
-    case 'SHOW_BURGER': {
-      return { ...state }
-    }
-    default:
-      return state
+
+export const burger = createReducer(initialState, {
+  [showBurger]: state => {
+    state.visible = true
+  },
+  [hideBurger]: state => {
+    state.visible = false
   }
-}
+})
